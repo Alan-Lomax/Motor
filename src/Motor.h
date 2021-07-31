@@ -16,12 +16,10 @@ class Motor {
     
   public:
     Motor(byte MotorPin1, byte MotorPin2, byte MotorSpeedPin);
-    void DirCW();
-    void DirCCW();
-    void On(byte SpeedVal);
-    void Off();
-    bool IsDirCW();
-    bool IsDirCCW();
-    byte CurrentSpeed();
+    void      setDirection(direction whichWay);
+    direction getDirection();
+    void      on(byte SpeedVal);
+    void      off();
+    byte      currentSpeed();
 };
 #endif

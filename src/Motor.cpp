@@ -10,36 +10,44 @@ void Motor::init() {
   pinMode(_motorPin1, OUTPUT);
   pinMode(_motorPin2, OUTPUT);
   pinMode(_motorSpeedPin, OUTPUT);
-  // Trying to avoid duplicate code.
-  // call the existing function off() to turn everything off
-  Off();
+  // To avoid duplicate code just call the existing function off() to turn everything off
+  off();
 }
+
 // Methods
-void Motor::DirCW() {
-  digitalWrite(_motorPin1, HIGH);
-  digitalWrite(_motorPin2, LOW);
+void Motor::setDirection( direction newDirection) {
+  switch ( newDirection){
+  case CLOCKWISE:
+    digitalWrite(_motorPin1, HIGH);
+    digitalWrite(_motorPin2, LOW);
   _currentDirCW = true;
+  break;
+  case COUNTERCLOCKWISE:
+    digitalWrite(_motorPin1, LOW);
+    digitalWrite(_motorPin2, HIGH);
+    _currentDirCW = false;
+  break;
+  }
 }
-void Motor::DirCCW() {
-  digitalWrite(_motorPin1, LOW);
-  digitalWrite(_motorPin2, HIGH);
-  _currentDirCW = false;
-}
-void Motor::On(byte SpeedVal) {         // turn on motor at speed of the passed value
+
+void Motor::on(byte SpeedVal) {         // turn on motor at speed of the passed value
   _speedValue = SpeedVal;
   analogWrite(_motorSpeedPin, _speedValue);
 }
-void Motor::Off() {                  // set speed to zero
-  _speedValue = 0;
-  analogWrite(_motorSpeedPin, _speedValue);
-}
+void Motor::off() {                  // set speed to zero by calling the on function with a value of zero
+  on(0);                             // Again this approach just minimizes duplication of lines of code.
+ }
+
 // Properties (returns a value)
-bool Motor::IsDirCW() {              // returns true if current direction is CW, False otherwise.
-   return _currentDirCW;
+direction getDirection() {
+     if ( _currentDirCW){ 
+       return CLOCKWISE;
+     }
+     else {
+       return COUNTERCLOCKWISE;
+     }
 }
-bool Motor::IsDirCCW() {             // This will always be the opposite of IsDirCW()
-   return !IsDirCW();
-}
-byte Motor::CurrentSpeed() {         // returns the current speed value ( 0 - 255)
+
+byte Motor::currentSpeed() {         // returns the current speed value ( 0 - 255)
    return _speedValue;
 }
