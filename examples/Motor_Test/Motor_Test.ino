@@ -1,7 +1,7 @@
 #include <Motor.h>
 /*
   Simple Motor Control - all Testing done using a L298N Motor Control Board
-  Also 
+  Also
 
   Notes
   The motor speed ramps to target, it does not jump to target.
@@ -34,7 +34,7 @@ void loop() {
     motor1.on(motorValue);
     delay(30);                                                     // 30 milliseconds between each increment of the motor speed.
   }
-  
+
   digitalWrite(LED_BUILTIN, false);                                 // turn off LED to ack ramp is complete
   Serial.print("Current Speed is : ");
   Serial.println(motor1.CurrentSpeed());
