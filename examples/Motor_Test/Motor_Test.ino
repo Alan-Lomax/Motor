@@ -1,4 +1,4 @@
-#include <Motor.h>
+#include "Motor.h"
 /*
   Simple Motor Control - all Testing done using a L298N Motor Control Board
   Also
@@ -14,6 +14,7 @@
 #define     MotorPin1 7
 #define     MotorPin2 8
 #define MotorSpeedPin 9
+
 int motorValue;                                                    // To store the actual instantaneous commanded speed of the motor
 Motor motor1(MotorPin1, MotorPin2, MotorSpeedPin);                 // define motor1 as our new member of the Motor class
 
@@ -23,32 +24,32 @@ void setup() {
 
   pinMode(BUTTON_PIN, INPUT_PULLUP);                               // Button pin is defined as an input
   pinMode(LED_BUILTIN, OUTPUT);                                    // LED pin is defined as an output
+
+  motor1.NewDirection(CLOCKWISE);                                  // set the direction of rotation using the enum CLOCKWISE or COUNTERCLOCKWISE
 }
 
 void loop() {
   wait ();                                                         // wait for a complete press and release of our button
 
   digitalWrite(LED_BUILTIN, true);                                 // turn on LED to ack that button press has been read in
-  setDirection(CLOCKWISE);                                         // set the direction of rotation using the enum CLOCKWISE or COUNTERCLOCKWISE
   for ( motorValue = 0; motorValue <= 254; motorValue += 1 ) {     // ramp speed up from zero to near full speed
-    motor1.on(motorValue);
+    motor1.On(motorValue);
     delay(30);                                                     // 30 milliseconds between each increment of the motor speed.
   }
 
   digitalWrite(LED_BUILTIN, false);                                 // turn off LED to ack ramp is complete
   Serial.print("Current Speed is : ");
-  Serial.println(motor1.CurrentSpeed());
+  Serial.println(motor1.currentSpeed());
 
   wait ();
   digitalWrite(LED_BUILTIN, true);                                 // turn on LED to ack that button press has been read in
-  motor1.DirCW();
   for ( motorValue = 254; motorValue > 0; motorValue -= 1 ) {      // ramp speed down to zero from full speed
-    motor1.on(motorValue);
+    motor1.On(motorValue);
     delay(50);                                                     // This time 50 milliseconds between each reduction of the motor speed (notice the effect).
   }
   digitalWrite(LED_BUILTIN, false);                                // turn off LED to ack ramp is complete
   Serial.print("Current Speed is : ");
-  Serial.println(motor1.CurrentSpeed());
+  Serial.println(motor1.currentSpeed());
 }
 
 void wait () {

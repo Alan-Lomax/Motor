@@ -1,4 +1,6 @@
 #include "Motor.h"
+#include "direction.h"
+
 Motor::Motor(byte MotorPin1, byte MotorPin2, byte MotorSpeedPin) {
   // Save the passed pins into the local variables
   _motorPin1     = MotorPin1;
@@ -15,15 +17,15 @@ void Motor::init() {
 }
 
 // Methods
-void Motor::setDirection( direction newDirection) {
-  switch ( newDirection) {
+void Motor::NewDirection(direction _Direction){
+  digitalWrite(_motorPin1, LOW);        // Before changing direction 
+  digitalWrite(_motorPin2, LOW);        // ensure all legs of thge H bridge are off
+  switch (_Direction) {
     case CLOCKWISE:
       digitalWrite(_motorPin1, HIGH);
-      digitalWrite(_motorPin2, LOW);
       _currentDirCW = true;
       break;
-    case COUNTERCLOCKWISE:
-      digitalWrite(_motorPin1, LOW);
+    case COUNTER_CLOCKWISE:
       digitalWrite(_motorPin2, HIGH);
       _currentDirCW = false;
       break;
@@ -34,6 +36,7 @@ void Motor::On(byte SpeedVal) {         // turn on motor at speed of the passed 
   _speedValue = SpeedVal;
   analogWrite(_motorSpeedPin, _speedValue);
 }
+
 void Motor::Off() {                  // set speed to zero by calling the on function with a value of zero
   On(0);                             // Again this approach just minimizes duplication of lines of code.
 }
@@ -41,10 +44,10 @@ void Motor::Off() {                  // set speed to zero by calling the on func
 // Properties (returns a value)
 direction Motor::getDirection() {
   if ( _currentDirCW) {
-    return direction CLOCKWISE;
+    return CLOCKWISE;
   }
   else {
-    return direction COUNTERCLOCKWISE;
+    return COUNTER_CLOCKWISE;
   }
 }
 

@@ -2,7 +2,10 @@
 #define MY_MOTOR_H
 #include <Arduino.h>
 
-enum direction {CLOCKWISE, COUNTERCLOCKWISE};
+enum direction {
+  CLOCKWISE,
+  COUNTER_CLOCKWISE
+};
 
 class Motor {
     // All local variables begin with underscore to differentiate them from other external variables
@@ -16,10 +19,10 @@ class Motor {
 
   public:
     Motor(byte MotorPin1, byte MotorPin2, byte MotorSpeedPin);
-    void      setDirection(direction whichWay);
     direction getDirection();
-    void      On(byte SpeedVal);
-    void      Off();
-    byte      currentSpeed();
+    void NewDirection(direction _Direction);
+    void On(byte SpeedVal);
+    void Off();
+    byte currentSpeed();
 };
 #endif
