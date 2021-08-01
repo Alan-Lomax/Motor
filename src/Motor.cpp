@@ -1,6 +1,4 @@
 #include "Motor.h"
-#include "direction.h"
-
 Motor::Motor(byte MotorPin1, byte MotorPin2, byte MotorSpeedPin) {
   // Save the passed pins into the local variables
   _motorPin1     = MotorPin1;
