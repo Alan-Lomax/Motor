@@ -12,15 +12,14 @@ void Motor::init() {
   pinMode(_motorPin1, OUTPUT);
   pinMode(_motorPin2, OUTPUT);
   pinMode(_motorSpeedPin, OUTPUT);
-  // To avoid duplicate code just call the existing function off() to turn everything off
-  Off();
+  Off();                                // To avoid duplicate code just call the existing function off()
 }
 
 // Methods
-void Motor::NewDirection(direction _Direction){
+void Motor::setDirection(direction newDirection){
   digitalWrite(_motorPin1, LOW);        // Before changing direction 
   digitalWrite(_motorPin2, LOW);        // ensure all legs of thge H bridge are off
-  switch (_Direction) {
+  switch (newDirection) {
     case CLOCKWISE:
       digitalWrite(_motorPin1, HIGH);
       _currentDirCW = true;
@@ -37,8 +36,8 @@ void Motor::On(byte SpeedVal) {         // turn on motor at speed of the passed 
   analogWrite(_motorSpeedPin, _speedValue);
 }
 
-void Motor::Off() {                  // set speed to zero by calling the on function with a value of zero
-  On(0);                             // Again this approach just minimizes duplication of lines of code.
+void Motor::Off() {                  // Just set speed to zero
+  On(0);                             // This approach just minimizes duplication of lines of code.
 }
 
 // Properties (returns a value)

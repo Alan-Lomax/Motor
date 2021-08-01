@@ -1,7 +1,6 @@
 #include "Motor.h"
 /*
-  Simple Motor Control - all Testing done using a L298N Motor Control Board
-  Also
+  Simple Motor Control using a L298N Motor Control Board
 
   Notes
   The motor speed ramps to target, it does not jump to target.
@@ -25,7 +24,7 @@ void setup() {
   pinMode(BUTTON_PIN, INPUT_PULLUP);                               // Button pin is defined as an input
   pinMode(LED_BUILTIN, OUTPUT);                                    // LED pin is defined as an output
 
-  motor1.NewDirection(CLOCKWISE);                                  // set the direction of rotation using the enum CLOCKWISE or COUNTERCLOCKWISE
+  motor1.setDirection(CLOCKWISE);                                  // set the direction of rotation using the enum CLOCKWISE or COUNTERCLOCKWISE
 }
 
 void loop() {
@@ -37,7 +36,7 @@ void loop() {
     delay(30);                                                     // 30 milliseconds between each increment of the motor speed.
   }
 
-  digitalWrite(LED_BUILTIN, false);                                 // turn off LED to ack ramp is complete
+  digitalWrite(LED_BUILTIN, false);                                // turn off LED to ack ramp is complete
   Serial.print("Current Speed is : ");
   Serial.println(motor1.currentSpeed());
 
