@@ -17,7 +17,7 @@ as can be seen in the sample code below.
 
 ### Example
 
-The following code waits for a button (push and release) and then ramps the motor spped from zero to full speed.
+The following code waits for a button (push and release) and then ramps the motor speed from zero to full speed.
 A second button push and release ramps the motor speed down to zero at a different rate.
 
      #include "Motor.h"
