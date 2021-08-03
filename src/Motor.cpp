@@ -10,7 +10,7 @@ void Motor::init() {
   pinMode(_motorPin1, OUTPUT);
   pinMode(_motorPin2, OUTPUT);
   pinMode(_motorSpeedPin, OUTPUT);
-  Off();                                // To avoid duplicate code just call the existing function off()
+  off();                                // To avoid duplicate code just call the existing function off()
 }
 
 // Methods
@@ -29,13 +29,13 @@ void Motor::setDirection(direction newDirection){
   }
 }
 
-void Motor::On(byte SpeedVal) {         // turn on motor at speed of the passed value
+void Motor::on(byte SpeedVal) {         // turn on motor at speed of the passed value
   _speedValue = SpeedVal;
   analogWrite(_motorSpeedPin, _speedValue);
 }
 
-void Motor::Off() {                  // Just set speed to zero
-  On(0);                             // This approach just minimizes duplication of lines of code.
+void Motor::off() {                  // Just set speed to zero
+  on(0);                             // This approach just minimizes duplication of lines of code.
 }
 
 // Properties (returns a value)

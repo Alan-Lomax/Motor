@@ -32,7 +32,7 @@ void loop() {
 
   digitalWrite(LED_BUILTIN, true);                                 // turn on LED to ack that button press has been read in
   for ( motorValue = 0; motorValue <= 254; motorValue += 1 ) {     // ramp speed up from zero to near full speed
-    motor1.On(motorValue);
+    motor1.on(motorValue);
     delay(30);                                                     // 30 milliseconds between each increment of the motor speed.
   }
 
@@ -43,7 +43,7 @@ void loop() {
   wait ();
   digitalWrite(LED_BUILTIN, true);                                 // turn on LED to ack that button press has been read in
   for ( motorValue = 254; motorValue > 0; motorValue -= 1 ) {      // ramp speed down to zero from full speed
-    motor1.On(motorValue);
+    motor1.on(motorValue);
     delay(50);                                                     // This time 50 milliseconds between each reduction of the motor speed (notice the effect).
   }
   digitalWrite(LED_BUILTIN, false);                                // turn off LED to ack ramp is complete
